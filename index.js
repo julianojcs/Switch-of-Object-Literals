@@ -51,3 +51,47 @@ function calculate(num1, num2, action) {
   return actions[action]?.(num1, num2) ?? 'Calculation is not recognised'
   // optional chaining (the ?. in the last line of code) to only execute the response if it is defined. Otherwise, fall through to the default return string
 }
+
+
+// a Literals Object function that receive an object as parameter and return another object according with the object parameter property
+
+export const getOptionItem = {
+  case: (card) => ({
+    _id: card._id,
+    name: card.data.name,
+    label: card.data.dataInicio.substr(0, 10).split('-').join('/')
+  }),
+  person: (card) => ({
+    _id: card._id,
+    name: card.data.name,
+    label: card.data.IdNumber
+  }),
+  organization: (card) => ({
+    _id: card._id,
+    name: card.data.codigo,
+    label: card.data.data.cnpj
+  }),
+  occurence: (card) => ({
+    _id: card._id,
+    name: card.data.name,
+    label: card.data.data.substr(0, 10).split('-').join('/')
+  }),
+  ship: (card) => ({
+    _id: card._id,
+    name: card.data.code,
+    label: `${card.data.imo ?? card.data.registro}`
+  }),
+  plane: (card) => ({
+    _id: card._id,
+    name: card.data.registration,
+    label: card.data.data.serie
+  }),
+  document: (card) => ({
+    _id: card._id,
+    name: card.data.name,
+    label: card.data.number
+  })
+}
+
+console.log(getOptionItem[entity](json.data[cardType])
+
